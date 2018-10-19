@@ -15,27 +15,25 @@ namespace FlappyBird
     {
         
         GameBoard gameBoard = new GameBoard();
-        
+        TimerCallback cb;
         System.Threading.Timer timer;
         public Form1()
         {
             InitializeComponent();
+            this.Controls.Add(gameBoard);
 
-            this.Controls.Add(gameBoard);           
-            gameBoard.Focus();
-
-            TimerCallback cb = new TimerCallback(update);
+            
+            cb = new TimerCallback(update);
             timer = new System.Threading.Timer(cb, "nothing", 0, 30);
         }
         public void update(object state)
         {
             if (!gameBoard.update())
+            {
                 timer.Dispose();
+            }
             
         }
 
-        
-
-        
     }
 }

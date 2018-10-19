@@ -10,7 +10,7 @@ namespace FlappyBird
 {
     class GameBoard : Panel
     {
-        Bird bird = new Bird();
+        public Bird bird = new Bird();
         Tube upTube = new Tube(300,50,"up");
         Tube downTube = new Tube(300, 50, "down");
         int score = 0;
@@ -50,6 +50,7 @@ namespace FlappyBird
                 score++;
                 lbScore.Text = score.ToString();
             }
+            
             if (bird.colliding(upTube) || bird.colliding(downTube))
                 return false;
             else

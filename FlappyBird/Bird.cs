@@ -15,6 +15,7 @@ namespace FlappyBird
         const int g = 100;
         const int Vo = 100;
         const float timeInterval = 0.03f;
+        public bool restarting;
         public Bird()
         {
             
@@ -56,8 +57,9 @@ namespace FlappyBird
         }
         public void evt(Object sender, KeyPressEventArgs e)
         {
-            this.pressing = true;
-
+            if(e.KeyChar == ' ')
+                this.pressing = true;
+            
         }
     }
 }
