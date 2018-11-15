@@ -14,21 +14,30 @@ namespace FlappyBird
     public partial class Form1 : Form
     {
         
-        GameBoard gameBoard = new GameBoard();
+        GameBoard gameBoard;
         TimerCallback cb;
         System.Threading.Timer timer;
         public Form1()
         {
             InitializeComponent();
-            this.Controls.Add(gameBoard);
-
-            
-            cb = new TimerCallback(update);
-            timer = new System.Threading.Timer(cb, "nothing", 0, 30);
-            gameBoard.bird.Focus();
+            Start();
             this.ActiveControl = gameBoard.bird;
         }
-        public void update(object state)
+        private void Start()
+        {
+            this.Controls.Remove(gameBoard);
+            gameBoard = new GameBoard();
+            this.Controls.Add(gameBoard);
+            gameBoard.bird.Focus();
+
+            CreateThread();
+        }
+        private void CreateThread()
+        {
+            cb = new TimerCallback(Update);
+            timer = new System.Threading.Timer(cb, "nothing", 0, 30);
+        }
+        private void Update(object state)
         {
             if (!gameBoard.update())
             {
@@ -39,13 +48,7 @@ namespace FlappyBird
 
         private void btnRestart_Click(object sender, EventArgs e)
         {
-            this.Controls.Remove(gameBoard);
-            gameBoard = new GameBoard();
-            this.Controls.Add(gameBoard);
-            cb = new TimerCallback(update);
-
-            timer = new System.Threading.Timer(cb, "nothing", 0, 30);
-            gameBoard.bird.Focus();
+            Start();
         }
     }
 }
