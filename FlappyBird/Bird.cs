@@ -15,7 +15,7 @@ namespace FlappyBird
         const int g = 100;
         const int Vo = 100;
         const float timeInterval = 0.03f;
-        public bool restarting;
+        
         public Bird()
         {
             
@@ -53,7 +53,7 @@ namespace FlappyBird
         }
         public bool passing(Control another)
         {
-            return this.Left == another.Right;
+            return this.Left == another.Right  || this.Left == another.Right+1;
         }
         public void evt(Object sender, KeyPressEventArgs e)
         {

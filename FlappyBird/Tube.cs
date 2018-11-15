@@ -10,8 +10,8 @@ namespace FlappyBird
 {
     class Tube : Label
     {
-        
 
+        Random random = new Random();
         public Tube(int x, int height, string orien)
         {
             this.Width = 20;
@@ -23,14 +23,18 @@ namespace FlappyBird
             else
                 this.Top = 50;
         }
-        public void update()
+        public void update(int newHeightForNewTurn, int newLeftForNewTurn)
         {
-            if (this.Left > 0)
+            if (this.Left > -20)
+            {
                 this.Left -= 2;
+                if (this.Left < 0) this.Visible = false;
+            }
             else
             {
-                this.Left = 300;
-                this.Height = 30 + new Random().Next(10, 20);
+                this.Visible = true;
+                this.Left = newLeftForNewTurn;
+                this.Height = newHeightForNewTurn;
             }
                 
         }
