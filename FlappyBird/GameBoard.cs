@@ -82,13 +82,23 @@ namespace FlappyBird
                 lbScore.Text = score.ToString();
             }
             
-            if (bird.colliding(upTube) || bird.colliding(downTube) || bird.colliding(upTube2)|| bird.colliding(downTube2)
-                || bird.Top <= 0 || bird.Bottom >= this.Height)
+            if (checkCollide())
                 return false;
             else
                 return true;
         }
-        
+        private bool checkCollide()
+        {
+            if (bird.Top <= 0 || bird.Bottom >= this.Height) return true;
+            foreach(Control control in this.Controls)
+            {
+                if(control is Tube)
+                {
+                    if (bird.colliding(control)) return true;
+                }
+            }
+            return false;
+        }
         
     }
 }
