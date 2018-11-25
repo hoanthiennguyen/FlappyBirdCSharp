@@ -13,24 +13,18 @@ namespace FlappyBird
         public Tube downTube;
         public TubePair(int x)
         {
-            Random rd = new Random();
-            int variation = rd.Next(10,21);
-            upTube = new Tube(x, 50 + variation, "up");
-            downTube = new Tube(x, 50 - variation, "down");
-            
+            upTube = new Tube(x, 50, "up");
+            downTube = new Tube(x, 50, "down");
         }
         public void update()
         {
-            if (upTube.Left >= 0)
-            {
-                upTube.Left -= 2;
-                downTube.Left -= 2;
-            }
-            else
-            {
-                upTube.Left = 350;
-                downTube.Left = 350;
-            }
+            
+        }
+
+        public void AddedTo(GameBoard gameBoard)
+        {
+            gameBoard.Controls.Add(this.upTube);
+            gameBoard.Controls.Add(this.downTube);
         }
     }
 }
