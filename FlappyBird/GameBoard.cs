@@ -13,10 +13,9 @@ namespace FlappyBird
     {
         Random random = new Random();
         public Bird bird;
-        const int TUBE_LEFT = 400;
-        const int TUBE_HEIGHT = 50;
-        const int TUBE_LEFT_AMPLITUDE = 40;
-        const int TUBE_HEIGHT_AMPLITUDE = 30;
+        public const int TUBE_LEFT = 400;
+        public const int TUBE_HEIGHT = 50;
+        public const int TUBE_HEIGHT_AMPLITUDE = 30;
 
         int score = 0;
         Label lbScore;
@@ -36,8 +35,8 @@ namespace FlappyBird
         {
              upTube = new Tube(300, 50, "up");
              downTube = new Tube(300, 50, "down");
-             upTube2 = new Tube(TUBE_LEFT + TUBE_LEFT_AMPLITUDE, 40, "up");
-             downTube2 = new Tube(TUBE_LEFT + TUBE_LEFT_AMPLITUDE, 60, "down");
+             upTube2 = new Tube(TUBE_LEFT , 40, "up");
+             downTube2 = new Tube(TUBE_LEFT, 60, "down");
         }
         public void addComponenets()
         {
@@ -67,25 +66,46 @@ namespace FlappyBird
         private void updatePair(Tube up, Tube down)
         {
             int tubeHeightVariation = createRandom(TUBE_HEIGHT_AMPLITUDE);
-            int tubeLeftVariation = createRandom(TUBE_LEFT_AMPLITUDE);
-            up.update(TUBE_HEIGHT + tubeHeightVariation, TUBE_LEFT + tubeLeftVariation);
-            down.update(TUBE_HEIGHT - tubeHeightVariation, TUBE_LEFT + tubeLeftVariation);
+            up.update(TUBE_HEIGHT + tubeHeightVariation);
+            down.update(TUBE_HEIGHT - tubeHeightVariation);
         }
         public bool update()
         {
             bird.update();
-            updatePair(upTube, downTube);
-            updatePair(upTube2, downTube2);
-            if (bird.passing(upTube) || bird.passing(upTube2))
-            {
-                score++;
-                lbScore.Text = score.ToString();
-            }
+            updateTubes();
             
             if (CheckColliding())
                 return false;
             else
                 return true;
+        }
+        private void updateTubes()
+        {
+            int i = 0;
+            Random random = new Random();
+            int deltaHeight = 10;
+            foreach (Control control in this.Controls)
+            {
+                if (control is Tube tube)
+                {
+                    //upTube
+                    if(i % 2 == 0)
+                    {
+                        deltaHeight = random.Next(-TUBE_HEIGHT_AMPLITUDE, TUBE_HEIGHT_AMPLITUDE);
+                        if(bird.passing(tube))
+                        {
+                            score++;
+                            lbScore.Text = score.ToString();
+                        }
+                        tube.update(TUBE_HEIGHT + deltaHeight);
+                    }
+                    //downTube
+                    else
+                        tube.update(TUBE_HEIGHT - deltaHeight);
+
+                    i++;
+                }
+            }
         }
         private bool CheckColliding()
         {

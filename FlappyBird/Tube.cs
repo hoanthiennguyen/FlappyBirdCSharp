@@ -23,7 +23,7 @@ namespace FlappyBird
             else
                 this.Top = 50;
         }
-        public void update(int newHeightForNewTurn, int newLeftForNewTurn)
+        public void update(int newHeightForNewTurn)
         {
             if (this.Left > -20)
             {
@@ -33,7 +33,7 @@ namespace FlappyBird
             else
             {
                 this.Visible = true;
-                this.Left = newLeftForNewTurn;
+                this.Left = GameBoard.TUBE_LEFT;
                 this.Height = newHeightForNewTurn;
             }
                 
