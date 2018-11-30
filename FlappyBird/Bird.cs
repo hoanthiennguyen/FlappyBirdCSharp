@@ -13,7 +13,7 @@ namespace FlappyBird
         public bool pressing { get; set; }
         float V = 100;
         const int g = 100;
-        const int Vo = 100;
+        const int Vo = 80;
         const float timeInterval = 0.03f;
         
         public Bird()
@@ -26,7 +26,7 @@ namespace FlappyBird
             this.Height = 20;
             this.pressing = false;
             this.KeyPress += new KeyPressEventHandler(evt);
-
+            this.V = 0;
         }
         public  void update()
         {

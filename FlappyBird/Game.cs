@@ -11,13 +11,13 @@ using System.Windows.Forms;
 
 namespace FlappyBird
 {
-    public partial class Form1 : Form
+    public partial class Game : Form
     {
         
         GameBoard gameBoard;
         TimerCallback cb;
         System.Threading.Timer timer;
-        public Form1()
+        public Game()
         {
             InitializeComponent();
             Start();

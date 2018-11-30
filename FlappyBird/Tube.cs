@@ -10,15 +10,16 @@ namespace FlappyBird
 {
     class Tube : Label
     {
-
-        Random random = new Random();
-        public Tube(int x, int height, string orien)
+        readonly bool isUp;
+        
+        public Tube(int x, int height, bool isUp)
         {
             this.Width = 20;
             this.Height = height;
             this.Left = x;
             this.BackColor = Color.Blue;
-            if (orien == "up")
+            this.isUp = isUp;
+            if (isUp)
                 this.Top = 200;
             else
                 this.Top = 50;
@@ -34,6 +35,10 @@ namespace FlappyBird
             {
                 this.Visible = true;
                 this.Left = GameBoard.TUBE_LEFT;
+                if(isUp)
+                {
+                    this.Top = 200 + GameBoard.TUBE_HEIGHT - newHeightForNewTurn;
+                }
                 this.Height = newHeightForNewTurn;
             }
                 
