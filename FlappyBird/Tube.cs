@@ -1,28 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace FlappyBird
 {
     class Tube : Label
     {
-        readonly bool isUp;
-        
-        public Tube(int x, int height, bool isUp)
+        readonly bool isUpward;
+        const int UPPER_TOP = 20;
+        const int BELOW_TOP = GameBoard.HEIGHT - HEIGHT;
+        public const int HEIGHT = 50;
+
+        public Tube(int x, int height, bool isUpward)
         {
             this.Width = 20;
             this.Height = height;
             this.Left = x;
             this.BackColor = Color.Blue;
-            this.isUp = isUp;
-            if (isUp)
-                this.Top = 200;
+            this.isUpward = isUpward;
+            if (isUpward)
+            {
+                this.Top = BELOW_TOP + HEIGHT - height;
+            }
             else
-                this.Top = 50;
+                this.Top = UPPER_TOP;
         }
         public void update(int newHeightForNewTurn)
         {
@@ -32,10 +32,10 @@ namespace FlappyBird
             }
             else
             {
-                this.Left = GameBoard.TUBE_LEFT;
-                if(isUp)
+                this.Left = GameBoard.WIDTH;
+                if(isUpward)
                 {
-                    this.Top = 200 + GameBoard.TUBE_HEIGHT - newHeightForNewTurn;
+                    this.Top = BELOW_TOP + HEIGHT - newHeightForNewTurn;
                 }
                 this.Height = newHeightForNewTurn;
             }

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FlappyBird
@@ -53,7 +49,12 @@ namespace FlappyBird
         }
         public bool passing(Control another)
         {
-            return this.Left == another.Right  || this.Left == another.Right+1;
+            bool result =  this.Left == another.Right  || this.Left == another.Right+1;
+            if(result)
+            {
+                
+            }
+            return result;
         }
         public void evt(Object sender, KeyPressEventArgs e)
         {
