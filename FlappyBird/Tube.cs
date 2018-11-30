@@ -26,14 +26,12 @@ namespace FlappyBird
         }
         public void update(int newHeightForNewTurn)
         {
-            if (this.Left > -20)
+            if (this.Left > 0)
             {
                 this.Left -= 2;
-                if (this.Left < 0) this.Visible = false;
             }
             else
             {
-                this.Visible = true;
                 this.Left = GameBoard.TUBE_LEFT;
                 if(isUp)
                 {

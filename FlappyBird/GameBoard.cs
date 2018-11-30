@@ -16,8 +16,8 @@ namespace FlappyBird
         public const int TUBE_HEIGHT = 50;
         public const int TUBE_HEIGHT_AMPLITUDE = 30;
 
-        const int NUMBER_OF_TUBEPARIR = 7;
-        const int GAP = 70;
+        const int NUMBER_OF_TUBEPARIR = 5;
+        const int GAP = 100;
         int score = 0;
         Label lbScore;
 
@@ -58,7 +58,7 @@ namespace FlappyBird
             for (int i = 0; i < NUMBER_OF_TUBEPARIR*2; i++)
             {
                 bool isUp = i % 2 == 0;
-                Tube tube = new Tube(TUBE_LEFT + 100 - (i / 2) * GAP, 50, isUp);
+                Tube tube = new Tube(TUBE_LEFT + 120 - (i / 2) * GAP, 50, isUp);
                 this.Controls.Add(tube);
             }
         }

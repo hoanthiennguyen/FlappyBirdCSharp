@@ -12,7 +12,7 @@ namespace FlappyBird
     {
         public bool pressing { get; set; }
         float V = 100;
-        const int g = 100;
+        const int g = 120;
         const int Vo = 80;
         const float timeInterval = 0.03f;
         
